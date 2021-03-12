@@ -1,2 +1,1 @@
-# king-kong
-Kong Admin UI
+# Kong Admin UI
