@@ -41,38 +41,79 @@
     </div>
 
     <div class="row row-deck row-cards">
-        <div class="col-sm-3">
+        <div class="col-sm-6">
             <div class="card">
-                <div class="card-body px-2 py-4 text-center">
-                    <div class="h1 m-0">{data.server.total_requests}</div>
-                    <div class="text-muted">Total requests</div>
+                <div class="card-body">
+                    <p class="mb-3">
+                        <strong>{data.server.total_requests}</strong> total requests
+                    </p>
+
+                    <div class="progress progress-separated mb-3">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: {(data.server.connections_accepted / data.server.total_requests) * 100}%"></div>
+
+                        <div class="progress-bar bg-info" role="progressbar" style="width: {((data.server.connections_handled - data.server.connections_accepted) / data.server.total_requests) * 100}%"></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-auto d-flex align-items-center pe-2">
+                            <span class="legend me-2 bg-success"></span>
+                            <span>Accepted</span>
+                            <span class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-muted">
+                                {data.server.connections_accepted}
+                            </span>
+                        </div>
+                        <div class="col-auto d-flex align-items-center px-2">
+                            <span class="legend me-2 bg-info"></span>
+                            <span>Handled</span>
+                            <span class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-muted">
+                                {data.server.connections_handled}
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-sm-3">
+        <div class="col-sm-6">
             <div class="card">
-                <div class="card-body px-2 py-4 text-center">
-                    <div class="h1 m-0">{data.server.connections_accepted}</div>
-                    <div class="text-muted">Accepted connections</div>
-                </div>
-            </div>
-        </div>
+                <div class="card-body">
+                    <p class="mb-3">
+                        <strong>{data.server.connections_active}</strong> active connections
+                    </p>
 
-        <div class="col-sm-3">
-            <div class="card">
-                <div class="card-body px-2 py-4 text-center">
-                    <div class="h1 m-0">{data.server.connections_active}</div>
-                    <div class="text-muted">Active connections</div>
-                </div>
-            </div>
-        </div>
+                    <div class="progress progress-separated mb-3">
+                        <div class="progress-bar bg-info" role="progressbar" style="width: {(data.server.connections_reading / data.server.connections_active) * 100}%"></div>
 
-        <div class="col-sm-3">
-            <div class="card">
-                <div class="card-body px-2 py-4 text-center">
-                    <div class="h1 m-0">{data.server.connections_waiting}</div>
-                    <div class="text-muted">Waiting connections</div>
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {(data.server.connections_writing / data.server.connections_active) * 100}%"></div>
+
+                        <div class="progress-bar bg-yellow" role="progressbar" style="width: {(data.server.connections_waiting / data.server.connections_active) * 100}%"></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-auto d-flex align-items-center pe-2">
+                            <span class="legend me-2 bg-info"></span>
+                            <span>Reading</span>
+                            <span class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-muted">
+                                {data.server.connections_reading}
+                            </span>
+                        </div>
+
+                        <div class="col-auto d-flex align-items-center px-2">
+                            <span class="legend me-2 bg-primary"></span>
+                            <span>Writing</span>
+                            <span class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-muted">
+                                {data.server.connections_writing}
+                            </span>
+                        </div>
+
+                        <div class="col-auto d-flex align-items-center px-2">
+                            <span class="legend me-2 bg-yellow"></span>
+                            <span>Waiting</span>
+                            <span class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-muted">
+                                {data.server.connections_waiting}
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -80,7 +121,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Kong memory</h3>
+                    <h3 class="card-title">Shared dictionaries</h3>
                 </div>
                 <table class="table card-table table-vcenter">
                     <thead>
