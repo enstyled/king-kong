@@ -23,32 +23,32 @@
                 </tr>
             </thead>
             <tbody>
-                {#each data as entity, i}
+                {#each data as record, i}
                     <tr>
                         <td>
                             <input class="form-check-input m-0 align-middle" type="checkbox">
                         </td>
                         <td>
-                            <a href="/{entity}/{entity.id}" class="text-reset">
-                                {entity.name}
+                            <a href="/{entity}/{record.id}" class="text-reset">
+                                {record.name}
                             </a>
                         </td>
-                        <td>{entity.paths}</td>
+                        <td>{record.paths}</td>
                         <td>
-                            <a href="/services/{entity.service.id}" class="text-reset">
-                                {entity.service.id}
+                            <a href="/services/{record.service.id}" class="text-reset">
+                                {record.service.id}
                             </a>
                         </td>
                         <td>
-                            {#each entity.protocols as protocol}
+                            {#each record.protocols as protocol}
                                 <span class="badge bg-blue-lt me-1">
                                     {protocol}
                                 </span>
                             {/each}
                         </td>
                         <td>
-                            {#if entity.methods}
-                                {#each entity.methods as method}
+                            {#if record.methods}
+                                {#each record.methods as method}
                                     <span class="badge bg-green-lt me-1">
                                         {method}
                                     </span>
@@ -56,7 +56,7 @@
                             {/if}
                         </td>
                         <td class="text-end">
-                            <Date timestamp="{entity.created_at}" />
+                            <Date timestamp="{record.created_at}" />
                         </td>
                     </tr>
                 {/each}

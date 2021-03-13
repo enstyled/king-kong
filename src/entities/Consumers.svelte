@@ -21,19 +21,19 @@
                 </tr>
             </thead>
             <tbody>
-                {#each data as entity, i}
+                {#each data as record, i}
                     <tr>
                         <td>
                             <input class="form-check-input m-0 align-middle" type="checkbox">
                         </td>
                         <td>
-                            <a href="/{entity}/{entity.id}" class="text-reset">
-                                {entity.username}
+                            <a href="/{entity}/{record.id}" class="text-reset">
+                                {record.username}
                             </a>
                         </td>
-                        <td>{entity.custom_id}</td>
+                        <td>{record.custom_id}</td>
                         <td class="text-end">
-                            <Date timestamp="{entity.created_at}" />
+                            <Date timestamp="{record.created_at}" />
                         </td>
                     </tr>
                 {/each}
