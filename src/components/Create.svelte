@@ -1,6 +1,7 @@
 <script>
     import {router} from 'tinro';
     import Loading from './Loading.svelte';
+    import Error from './Error.svelte';
     import {authentication} from '../stores.js';
 
     export let entity;
@@ -137,5 +138,5 @@
         </div>
     </div>
 {:catch error}
-	<p style="color: red">{error.message}</p>
+	<Error message="{error.message}" />
 {/await}

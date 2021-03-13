@@ -1,5 +1,6 @@
 <script>
     import Loading from './Loading.svelte';
+    import Error from './Error.svelte';
     import {authentication} from '../stores.js';
 
     async function getData() {
@@ -146,9 +147,5 @@
         </div>
     </div>
 {:catch error}
-    <div class="d-flex flex-column justify-content-center">
-        <div class="empty">
-            <p class="empty-title">{error.message}</p>
-        </div>
-    </div>
+    <Error message="{error.message}" />
 {/await}
