@@ -1,5 +1,6 @@
 <script>
     import {router} from 'tinro';
+    import {authentication} from '../stores.js';
 
     let url = '';
     let password = '';
@@ -10,12 +11,10 @@
 
 		fetch(`${url}?apikey=${password}`).then(function(response) {
             if (response.ok) {
-                let data = JSON.stringify({
+                authentication.set({
                     url: url,
                     password: password
                 });
-
-                localStorage.setItem('authentication', data);
 
                 router.goto('/services');
             } else {

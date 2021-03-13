@@ -1,14 +1,9 @@
 <script>
     import Loading from './Loading.svelte';
-
-    let authentication = localStorage.getItem('authentication');
-
-    if (authentication) {
-        authentication = JSON.parse(authentication);
-    }
+    import {authentication} from '../stores.js';
 
     async function getData() {
-        const url = `${authentication.url}/status?apikey=${authentication.password}`;
+        const url = `${$authentication.url}/status?apikey=${$authentication.password}`;
 		const response = await fetch(url);
         const json = await response.json();
         return json;

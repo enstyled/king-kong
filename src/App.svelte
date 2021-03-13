@@ -15,7 +15,7 @@
     import Certificates from './entities/Certificates.svelte';
     import Tags from './entities/Tags.svelte';
 
-    let authentication = localStorage.getItem('authentication');
+    import {authentication} from './stores.js';
 </script>
 
 <svelte:head>
@@ -24,7 +24,7 @@
 </svelte:head>
 
 <div class="page">
-    {#if authentication}
+    {#if $authentication}
         <Nav />
 
         <div class="content">

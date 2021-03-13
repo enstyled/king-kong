@@ -1,5 +1,10 @@
 <script>
     import {active} from 'tinro';
+    import {authentication} from '../stores.js';
+
+    function logout() {
+        authentication.set(null);
+    }
 </script>
 
 <header class="navbar navbar-expand-md navbar-dark d-print-none">
@@ -15,7 +20,7 @@
         <div class="navbar-nav flex-row order-md-last">
             <ul class="navbar-nav flex-row order-md-last">
                 <li class="nav-item">
-                    <a href="/logout" class="nav-link">
+                    <a href="/logout" class="nav-link" on:click="{logout}">
                         Logout
                     </a>
                 </li>

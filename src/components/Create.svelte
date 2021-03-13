@@ -1,17 +1,12 @@
 <script>
     import {router} from 'tinro';
     import Loading from './Loading.svelte';
+    import {authentication} from '../stores.js';
 
     export let entity;
 
-    let authentication = localStorage.getItem('authentication');
-
-    if (authentication) {
-        authentication = JSON.parse(authentication);
-    }
-
     async function getSchema() {
-        const url = `${authentication.url}/schemas/${entity}?apikey=${authentication.password}`;
+        const url = `${$authentication.url}/schemas/${entity}?apikey=${$authentication.password}`;
 		const response = await fetch(url);
         const json = await response.json();
 
@@ -28,7 +23,7 @@
     let schema = getSchema();
 
     async function handleSubmit() {
-        const url = `${authentication.url}/${entity}?apikey=${authentication.password}`;
+        const url = `${$authentication.url}/${entity}?apikey=${$authentication.password}`;
 		const response = await fetch(url, {
             method: 'POST',
             headers: {

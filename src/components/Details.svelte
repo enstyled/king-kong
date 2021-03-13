@@ -2,18 +2,13 @@
     import {router} from 'tinro';
     import Loading from './Loading.svelte';
     import Error from './Error.svelte';
+    import {authentication} from '../stores.js';
 
     export let entity;
     export let id;
 
-    let authentication = localStorage.getItem('authentication');
-
-    if (authentication) {
-        authentication = JSON.parse(authentication);
-    }
-
     async function getData() {
-        const url = `${authentication.url}/${entity}/${id}?apikey=${authentication.password}`;
+        const url = `${$authentication.url}/${entity}/${id}?apikey=${$authentication.password}`;
 		const response = await fetch(url);
         const json = await response.json();
 
@@ -30,7 +25,7 @@
 
 
     async function deleteEntity() {
-        const url = `${authentication.url}/${entity}/${id}?apikey=${authentication.password}`;
+        const url = `${$authentication.url}/${entity}/${id}?apikey=${$authentication.password}`;
 		const response = await fetch(url, {
             method: 'DELETE'
         });
