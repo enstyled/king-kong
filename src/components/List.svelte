@@ -9,7 +9,11 @@
         const url = `${$authentication.url}/${entity}?apikey=${$authentication.password}`;
 		const response = await fetch(url);
         const json = await response.json();
-		return json.data;
+        const sorted = json.data.sort(function(a, b) {
+            return new Date(b.created_at) - new Date(a.created_at);
+        });
+
+        return sorted;
 	}
 
     let data = getData();
