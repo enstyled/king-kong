@@ -54,16 +54,5 @@
 
 
 <Route path="/:id" let:meta>
-    <Details entity="services" id="{meta.params.id}" let:data>
-        <ul>
-            <li>{data.id}</li>
-            <li>{data.name}</li>
-            <li>{data.protocol}</li>
-            <li>{data.host}</li>
-            <li>{data.port}</li>
-            <li>{data.path}</li>
-            <li>{data.created_at}</li>
-            <li>{data.updated_at}</li>
-        </ul>
-    </Details>
+    <Details entity="services" id="{meta.params.id}" let:data />
 </Route>

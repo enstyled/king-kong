@@ -49,12 +49,5 @@
 
 
 <Route path="/:id" let:meta>
-    <Details entity="consumers" id="{meta.params.id}" let:data>
-        <ul>
-            <li>{data.id}</li>
-            <li>{data.username}</li>
-            <li>{data.custom_id}</li>
-            <li><Date timestamp="{data.created_at}" /></li>
-        </ul>
-    </Details>
+    <Details entity="consumers" id="{meta.params.id}" let:data />
 </Route>

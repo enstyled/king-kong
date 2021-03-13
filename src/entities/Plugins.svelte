@@ -72,16 +72,5 @@
 
 
 <Route path="/:id" let:meta>
-    <Details entity="plugins" id="{meta.params.id}" let:data>
-        <ul>
-            <li>{data.id}</li>
-            <li>{data.name}</li>
-            <li>{data.paths}</li>
-            <li>{data.service.id}</li>
-            <li>{data.protocols}</li>
-            <li>{data.methods}</li>
-            <li>{data.created_at}</li>
-            <li>{data.updated_at}</li>
-        </ul>
-    </Details>
+    <Details entity="plugins" id="{meta.params.id}" let:data />
 </Route>
