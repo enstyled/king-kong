@@ -4,11 +4,6 @@
     import Details from '../components/Details.svelte';
     import Create from '../components/Create.svelte';
     import Date from '../components/Date.svelte';
-
-    let model = {
-        username: null,
-        custom_id: null
-    };
 </script>
 
 
@@ -49,22 +44,7 @@
 
 
 <Route path="/add">
-    <Create resource="consumers" let:resource data="{model}">
-        <div class="row">
-            <div class="col-6">
-                <div class="mb-3">
-                    <label class="form-label" for="username">Username</label>
-                    <input type="text" class="form-control" name="username" bind:value="{model.username}">
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="mb-3">
-                    <label class="form-label" for="custom_id">Custom id</label>
-                    <input type="text" class="form-control" name="custom_id" bind:value="{model.custom_id}">
-                </div>
-            </div>
-        </div>
-    </Create>
+    <Create resource="consumers" />
 </Route>
 
 

@@ -1,6 +1,7 @@
 <script>
     import {router} from 'tinro';
     import Loading from './Loading.svelte';
+    import Error from './Error.svelte';
 
     export let resource;
     export let id;
@@ -21,7 +22,7 @@
         if (response.ok) {
             return json;
         } else {
-            alert('Not found.')
+            throw json;
         }
 	}
 
@@ -116,5 +117,5 @@
         </div>
     </div>
 {:catch error}
-	<p style="color: red">{error.message}</p>
+    <Error message="{error.message}" />
 {/await}

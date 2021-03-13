@@ -4,16 +4,7 @@
     import Details from '../components/Details.svelte';
     import Create from '../components/Create.svelte';
     import Date from '../components/Date.svelte';
-
-    let model = {
-        name: null,
-        protocols: ['http', 'https'],
-        methods: null,
-        hosts: null,
-        paths: null
-    };
 </script>
-
 
 <Route path="/">
     <List resource="routes" let:data let:resource>
@@ -76,38 +67,7 @@
 
 
 <Route path="/add">
-    <Create resource="routes" let:resource data="{model}">
-        <div class="mb-3">
-            <label class="form-label" for="name">Name</label>
-            <input type="text" class="form-control" name="name" bind:value="{model.name}" placeholder="Optional">
-        </div>
-
-        <div class="row">
-            <div class="col-3">
-                <div class="mb-3">
-                    <label class="form-label" for="protocols">Protocols</label>
-                    <input type="text" class="form-control" name="protocols" bind:value="{model.protocols}" placeholder="http">
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="mb-3">
-                    <label class="form-label" for="methods">Methods</label>
-                    <input type="text" class="form-control" name="methods" bind:value="{model.methods}" placeholder="Optional">
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="mb-3">
-                    <label class="form-label" for="hosts">Hosts</label>
-                    <input type="number" class="form-control" name="hosts" bind:value="{model.hosts}" placeholder="Optional">
-                </div>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label" for="paths">Paths</label>
-            <input type="text" class="form-control" name="paths" bind:value="{model.paths}" placeholder="Optional">
-        </div>
-    </Create>
+    <Create resource="routes" />
 </Route>
 
 
