@@ -90,15 +90,28 @@
                                                     {#each field.one_of as option}
                                                         <label class="form-check">
                                                             <input class="form-check-input" type="radio" name="{field.name}" checked="{option == field.default}">
-                                                            <span class="form-check-label">{option}</span>
+                                                            <span class="form-check-label">
+                                                                {option}
+                                                            </span>
                                                         </label>
                                                     {/each}
                                                 </div>
                                             {/if}
                                         {:else if field.type == 'boolean'}
                                             <label class="form-check form-switch pt-2">
-                                                <input class="form-check-input" type="checkbox" checked={field.default}>
+                                                <input class="form-check-input" type="checkbox" checked="{field.default}">
                                             </label>
+                                        {:else if field.type == 'set' && field.elements && 'one_of' in field.elements}
+                                            <div class="pt-2">
+                                                {#each field.elements.one_of as element}
+                                                    <label class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" name="{field.name}" checked="{field.default.includes(element)}">
+                                                        <span class="form-check-label">
+                                                            {element}
+                                                        </span>
+                                                    </label>
+                                                {/each}
+                                            </div>
                                         {:else}
                                             <input type="{field.type == 'integer' ? 'number' : 'text'}" class="form-control" name="{field.name}" min="{field.between ? field.between[0] : ''}" max="{field.between ? field.between[1] : ''}" value="{field.default || ''}" required="{field.required}">
                                         {/if}
