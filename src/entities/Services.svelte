@@ -7,7 +7,7 @@
 </script>
 
 <Route path="/">
-    <List resource="services" let:data let:resource>
+    <List entity="services" let:data let:entity>
         <table class="table card-table table-vcenter text-nowrap datatable">
             <thead>
                 <tr>
@@ -23,22 +23,22 @@
                 </tr>
             </thead>
             <tbody>
-                {#each data as entity, i}
+                {#each data as record, i}
                     <tr>
                         <td>
                             <input class="form-check-input m-0 align-middle" type="checkbox">
                         </td>
                         <td>
-                            <a href="/{resource}/{entity.id}" class="text-reset">
-                                {entity.name}
+                            <a href="/{entity}/{record.id}" class="text-reset">
+                                {record.name}
                             </a>
                         </td>
-                        <td>{entity.protocol}</td>
-                        <td>{entity.host}</td>
-                        <td>{entity.port}</td>
-                        <td>{entity.path}</td>
+                        <td>{record.protocol}</td>
+                        <td>{record.host}</td>
+                        <td>{record.port}</td>
+                        <td>{record.path}</td>
                         <td class="text-end">
-                            <Date timestamp="{entity.created_at}" />
+                            <Date timestamp="{record.created_at}" />
                         </td>
                     </tr>
                 {/each}
@@ -49,12 +49,12 @@
 
 
 <Route path="/add">
-    <Create resource="services" />
+    <Create entity="services" />
 </Route>
 
 
 <Route path="/:id" let:meta>
-    <Details resource="services" id="{meta.params.id}" let:data>
+    <Details entity="services" id="{meta.params.id}" let:data>
         <ul>
             <li>{data.id}</li>
             <li>{data.name}</li>

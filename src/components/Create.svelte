@@ -2,7 +2,7 @@
     import {router} from 'tinro';
     import Loading from './Loading.svelte';
 
-    export let resource;
+    export let entity;
 
     let authentication = localStorage.getItem('authentication');
 
@@ -11,7 +11,7 @@
     }
 
     async function getSchema() {
-        const url = `${authentication.url}/schemas/${resource}?apikey=${authentication.password}`;
+        const url = `${authentication.url}/schemas/${entity}?apikey=${authentication.password}`;
 		const response = await fetch(url);
         const json = await response.json();
 
@@ -28,7 +28,7 @@
     let schema = getSchema();schema
 
     async function handleSubmit() {
-        const url = `${authentication.url}/${resource}?apikey=${authentication.password}`;
+        const url = `${authentication.url}/${entity}?apikey=${authentication.password}`;
 		const response = await fetch(url, {
             method: 'POST',
             headers: {
@@ -40,7 +40,7 @@
         const json = await response.json();
 
         if (response.ok) {
-            router.goto(`/${resource}/${json.id}`)
+            router.goto(`/${entity}/${json.id}`)
         } else {
             alert('Something went wrong')
         }
@@ -54,11 +54,11 @@
         <div class="row align-items-center">
             <div class="col">
                 <div class="page-pretitle">
-                    <a href="/{resource}" class="text-reset">
-                        {resource}
+                    <a href="/{entity}" class="text-reset">
+                        {entity}
                     </a>
                 </div>
-                <h2 class="page-title">Add new {resource}</h2>
+                <h2 class="page-title">Add new {entity}</h2>
             </div>
         </div>
     </div>
@@ -122,7 +122,7 @@
                     </div>
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-blue">Create {resource}</button>
+                        <button type="submit" class="btn btn-blue">Create {entity}</button>
                     </div>
                 </form>
             </div>

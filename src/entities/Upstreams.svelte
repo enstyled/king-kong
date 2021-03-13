@@ -7,7 +7,7 @@
 </script>
 
 <Route path="/">
-    <List resource="upstreams" let:data let:resource>
+    <List entity="upstreams" let:data let:entity>
         <table class="table card-table table-vcenter text-nowrap datatable">
             <thead>
                 <tr>
@@ -26,7 +26,7 @@
                             <input class="form-check-input m-0 align-middle" type="checkbox">
                         </td>
                         <td>
-                            <a href="/{resource}/{entity.id}" class="text-reset">
+                            <a href="/{entity}/{entity.id}" class="text-reset">
                                 {entity.name}
                             </a>
                         </td>
@@ -43,12 +43,12 @@
 
 
 <Route path="/add">
-    <Create resource="upstreams" />
+    <Create entity="upstreams" />
 </Route>
 
 
 <Route path="/:id" let:meta>
-    <Details resource="upstreams" id="{meta.params.id}" let:data>
+    <Details entity="upstreams" id="{meta.params.id}" let:data>
         <ul>
             <li>{data.id}</li>
             <li>{data.username}</li>

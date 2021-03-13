@@ -8,15 +8,15 @@
 
 
 <Route path="/">
-    <List resource="tags" />
+    <List entity="tags" />
 </Route>
 
 
 <Route path="/add">
-    <Create resource="tags" />
+    <Create entity="tags" />
 </Route>
 
 
 <Route path="/:id" let:meta>
-    <Details resource="tags" id="{meta.params.id}" />
+    <Details entity="tags" id="{meta.params.id}" />
 </Route>

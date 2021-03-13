@@ -8,15 +8,15 @@
 
 
 <Route path="/">
-    <List resource="certificates" />
+    <List entity="certificates" />
 </Route>
 
 
 <Route path="/add">
-    <Create resource="certificates" />
+    <Create entity="certificates" />
 </Route>
 
 
 <Route path="/:id" let:meta>
-    <Details resource="certificates" id="{meta.params.id}" />
+    <Details entity="certificates" id="{meta.params.id}" />
 </Route>
