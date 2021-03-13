@@ -13,6 +13,7 @@
     import Consumers from './entities/Consumers.svelte';
     import Upstreams from './entities/Upstreams.svelte';
     import Certificates from './entities/Certificates.svelte';
+    import Tags from './entities/Tags.svelte';
 
     let authentication = localStorage.getItem('authentication');
 </script>
@@ -55,6 +56,10 @@
 
                     <Route path="/certificates/*" firstmatch>
                         <Certificates />
+                    </Route>
+
+                    <Route path="/tags/*" firstmatch>
+                        <Tags />
                     </Route>
 
                     <Route fallback>
