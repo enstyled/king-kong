@@ -4,24 +4,29 @@
 
     let url = '';
     let password = '';
+    let error;
     let loading = false
+    let is_secure = location.protocol == 'https';
 
     function authenticate() {
+        error = null;
         loading = true;
 
 		fetch(`${url}?apikey=${password}`).then(function(response) {
-            if (response.ok) {
-                authentication.set({
-                    url: url,
-                    password: password
-                });
+            response.json().then(function(json) {
+                if (response.ok) {
+                    authentication.set({
+                        url: url,
+                        password: password
+                    });
 
-                router.goto('/services');
-            } else {
-                alert('Authentication failed');
-            }
+                    router.goto('/services');
+                } else {
+                    error = json.message;
+                }
+            });
         }).catch(function(error) {
-            alert('Authentication failed');
+            alert(error);
         }).finally(function() {
             loading = false;
         });
@@ -30,9 +35,16 @@
 
 <div class="flex-fill d-flex flex-column justify-content-center py-4">
     <div class="container-tight py-6">
+        <h2 class="card-title text-center">Login to your Kong Admin API</h2>
+
         <form class="card card-md" autocomplete="off" on:submit|preventDefault={authenticate}>
             <div class="card-body">
-                <h2 class="card-title text-center mb-4">Login to your Kong Admin API</h2>
+                {#if error}
+                    <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-title">Authentication failed</h4>
+                        <div class="text-muted">{error}</div>
+                    </div>
+                {/if}
 
                 <div class="mb-3">
                     <label class="form-label">Kong Admin API URL</label>
@@ -50,21 +62,18 @@
                     </div>
                 </div>
 
-                <div class="mb-2">
-                    <label class="form-check">
-                        <input type="checkbox" class="form-check-input">
-                        <span class="form-check-label">Remember me on this device</span>
-                    </label>
-                </div>
-
                 <div class="form-footer">
                     <button type="submit" class="btn btn-primary {loading ? 'btn-loading' : '' } w-100">Authenticate</button>
                 </div>
             </div>
         </form>
 
-        <div class="text-center text-muted mt-3">
-            The authentication details will be saved in LocalStorage and won't leave your browser.
+        <div class="text-center text-muted mt-3 small px-3">
+            {#if is_secure}
+                You are on a secure connection.
+            {/if}
+
+            The authentication details will be saved in your browser local storage.
         </div>
     </div>
 </div>
