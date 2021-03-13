@@ -5,19 +5,28 @@
 
     export let entity;
 
+    let data = {};
+
     async function getSchema() {
         const url = `${$authentication.url}/schemas/${entity}?apikey=${$authentication.password}`;
 		const response = await fetch(url);
         const json = await response.json();
 
-        console.log(json.fields);
-
-        return json.fields.map(function(field) {
+        const transformed = json.fields.map(function(field) {
             return {
                 name: Object.keys(field)[0],
                 ...Object.values(field)[0]
             }
         });
+
+        // Map the schema to the form data
+        transformed.forEach((field) => {
+            if (!field.auto) {
+                data[field.name] = field.default || null;
+            }
+        });
+
+        return transformed;
 	}
 
     let schema = getSchema();
@@ -94,7 +103,7 @@
                                             {/if}
                                         {:else if field.type == 'boolean'}
                                             <label class="form-check form-switch pt-2">
-                                                <input class="form-check-input" type="checkbox" checked="{field.default}">
+                                                <input class="form-check-input" type="checkbox" name="{field.name}" checked="{field.default}">
                                             </label>
                                         {:else if field.type == 'set' && field.elements && 'one_of' in field.elements}
                                             <div class="pt-2">
@@ -108,7 +117,11 @@
                                                 {/each}
                                             </div>
                                         {:else}
-                                            <input type="{field.type == 'integer' ? 'number' : 'text'}" class="form-control" name="{field.name}" min="{field.between ? field.between[0] : ''}" max="{field.between ? field.between[1] : ''}" value="{field.default || ''}" required="{field.required}">
+                                            {#if field.type == 'integer'}
+                                                <input type="number" class="form-control" name="{field.name}" min="{field.between ? field.between[0] : ''}" max="{field.between ? field.between[1] : ''}" bind:value="{data[field.name]}" required="{field.required}">
+                                            {:else}
+                                                <input type="text" class="form-control" name="{field.name}" bind:value="{data[field.name]}" required="{field.required}">
+                                            {/if}
                                         {/if}
                                     </div>
                                 </div>
