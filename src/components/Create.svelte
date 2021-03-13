@@ -25,7 +25,7 @@
         });
 	}
 
-    let schema = getSchema();schema
+    let schema = getSchema();
 
     async function handleSubmit() {
         const url = `${authentication.url}/${entity}?apikey=${authentication.password}`;
