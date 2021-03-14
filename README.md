@@ -4,6 +4,6 @@ Modern Web UI for the [Kong](https://github.com/kong/kong) Admin API, built with
 
 It's a single page application, running only in your browser, storing your authentication credentials in localStorage.
 
-<a href="https://app.netlify.com/start/deploy">
+<a href="https://app.netlify.com/start/deploy?repository=https://github.com/enstyled/king-kong">
   <img src="https://www.netlify.com/img/deploy/button.svg" title="Deploy to Netlify">
 </a>
