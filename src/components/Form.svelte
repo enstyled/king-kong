@@ -24,7 +24,7 @@
         // Map the schema to the form data
         transformed.forEach((field) => {
             if (!field.auto && !data[field.name]) {
-                data[field.name] = field.default || null;
+                data[field.name] = field.default;
             }
         });
 
@@ -67,9 +67,9 @@
                         <div class="col">
                             {#if field.one_of}
                                 {#if field.one_of.length > 3}
-                                    <select class="form-select" name="{field.name}">
+                                    <select class="form-select" name="{field.name}" bind:value="{data[field.name]}">
                                         {#each field.one_of as option}
-                                            <option value="{option}" selected="{option == field.default}">
+                                            <option value="{option}">
                                                 {option}
                                             </option>
                                         {/each}
@@ -78,7 +78,7 @@
                                     <div class="pt-2">
                                         {#each field.one_of as option}
                                             <label class="form-check">
-                                                <input class="form-check-input" type="radio" name="{field.name}" checked="{option == field.default}">
+                                                <input class="form-check-input" type="radio" bind:group="{data[field.name]}" value="{option}" checked="{data[field.name].includes(option)}">
                                                 <span class="form-check-label">
                                                     {option}
                                                 </span>
@@ -88,13 +88,13 @@
                                 {/if}
                             {:else if field.type == 'boolean'}
                                 <label class="form-check form-switch pt-2">
-                                    <input class="form-check-input" type="checkbox" name="{field.name}" checked="{field.default}">
+                                    <input class="form-check-input" type="checkbox" bind:checked="{data[field.name]}">
                                 </label>
                             {:else if field.type == 'set' && field.elements && 'one_of' in field.elements}
                                 <div class="pt-2">
                                     {#each field.elements.one_of as element}
                                         <label class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" name="{field.name}" checked="{field.default.includes(element)}">
+                                            <input class="form-check-input" type="checkbox" bind:group="{data[field.name]}" value="{element}" checked="{data[field.name].includes(element)}">
                                             <span class="form-check-label">
                                                 {element}
                                             </span>
