@@ -18,11 +18,6 @@
     import {authentication} from './stores.js';
 </script>
 
-<svelte:head>
-    <script src="https://unpkg.com/@tabler/core@1.0.0-beta/dist/js/tabler.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/@tabler/core@1.0.0-beta/dist/css/tabler.min.css">
-</svelte:head>
-
 <div class="page">
     {#if $authentication}
         <Nav />
