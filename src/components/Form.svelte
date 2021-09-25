@@ -10,8 +10,12 @@
     let schema = getSchema();
 
     async function getSchema() {
-        const url = `${$authentication.url}/schemas/${entity}?apikey=${$authentication.password}`;
-		const response = await fetch(url);
+        const url = `${$authentication.url}/schemas/${entity}`;
+        const response = await fetch(url, {
+            headers: {
+                apikey: $authentication.password
+            }
+        });
         const json = await response.json();
 
         const transformed = json.fields.map(function(field) {
@@ -32,12 +36,12 @@
 	}
 
     async function handleSubmit() {
-        const url = `${$authentication.url}/${entity}/${data.id || ''}?apikey=${$authentication.password}`;
-
-		const response = await fetch(url, {
+        const url = `${$authentication.url}/${entity}/${data.id || ''}`;
+        const response = await fetch(url, {
             method: data.id ? 'PUT' : 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                apikey: $authentication.password
             },
             body: JSON.stringify(data)
         });

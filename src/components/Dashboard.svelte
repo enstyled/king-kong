@@ -4,8 +4,12 @@
     import {authentication} from '../stores.js';
 
     async function getData() {
-        const url = `${$authentication.url}/status?apikey=${$authentication.password}`;
-		const response = await fetch(url);
+        const url = `${$authentication.url}/status`;
+        const response = await fetch(url, {
+            headers: {
+                apikey: $authentication.password
+            }
+        });
         const json = await response.json();
         return json;
 	}

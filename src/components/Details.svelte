@@ -9,8 +9,12 @@
     export let id;
 
     async function getData() {
-        const url = `${$authentication.url}/${entity}/${id}?apikey=${$authentication.password}`;
-		const response = await fetch(url);
+        const url = `${$authentication.url}/${entity}/${id}`;
+        const response = await fetch(url, {
+            headers: {
+                apikey: $authentication.password
+            }
+        });
         const json = await response.json();
 
         if (response.ok) {
@@ -23,9 +27,12 @@
     let data = getData();
 
     async function deleteEntity() {
-        const url = `${$authentication.url}/${entity}/${id}?apikey=${$authentication.password}`;
-		const response = await fetch(url, {
-            method: 'DELETE'
+        const url = `${$authentication.url}/${entity}/${id}`;
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+                apikey: $authentication.password
+            }
         });
 
 		if (response.ok) {

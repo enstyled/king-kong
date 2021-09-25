@@ -12,7 +12,11 @@
         error = null;
         loading = true;
 
-		fetch(`${url}?apikey=${password}`).then(function(response) {
+		fetch(url, {
+            headers: {
+                apikey: password
+            }
+        }).then(function(response) {
             response.json().then(function(json) {
                 if (response.ok) {
                     authentication.set({

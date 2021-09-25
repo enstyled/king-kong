@@ -6,8 +6,12 @@
     export let entity;
 
     async function getData() {
-        const url = `${$authentication.url}/${entity}?apikey=${$authentication.password}`;
-		const response = await fetch(url);
+        const url = `${$authentication.url}/${entity}`;
+        const response = await fetch(url, {
+            headers: {
+                apikey: $authentication.password
+            }
+        });
         const json = await response.json();
         const sorted = json.data.sort(function(a, b) {
             return new Date(b.created_at) - new Date(a.created_at);
